@@ -29,9 +29,25 @@ app.post("/notes", async(req,res)=>{
     })
 
 });
-//GET/notes => Get all note
-//Delete/notes=>Delete a note
-// patch/notes/:id => update a note
+
+app.delete('/arr/:id',  async(req,res)=>{
+
+    try{
+
+    const id = req.params.id ;
+
+    await modelname.findByIdAndDelete(id)
+
+    res.status(200).json({
+        message:" data delete sucessfully ",
+         
+    })
+}  catch(error){
+    res.status(500).json({
+        error:error.message 
+    })
+}
+})
 
 
 module.exports = app ;
