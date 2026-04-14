@@ -9,6 +9,8 @@ app.use(express.json())
 //post/notes=> create a note
 
 app.post("/notes", async(req,res)=>{
+
+    try{
     const data = req.body // title and decripation
     await noteModel.create({
 
@@ -19,6 +21,11 @@ app.post("/notes", async(req,res)=>{
     res.status(200).json({
         message: "note created "
     })
+    } catch(error){
+        res.status(500).json({
+            error:error.message
+        })
+        
 })
   app.get("/notes", async(req,res)=>{
       const notes = await noteModel.find()//  hmesa arry return krega
