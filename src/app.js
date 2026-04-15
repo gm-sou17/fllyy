@@ -56,5 +56,23 @@ app.delete('/arr/:id',  async(req,res)=>{
 }
 })
 
+app.patch('/arr/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    await modelname.findByIdAndUpdate(id, {
+      tital: req.body.tital,
+      description: req.body.description
+    });
+
+    res.status(200).json({
+      message: "data updated successfully"
+    });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 module.exports = app ;
