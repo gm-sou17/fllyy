@@ -28,12 +28,18 @@ app.post("/notes", async(req,res)=>{
         
 })
   app.get("/notes", async(req,res)=>{
+
+      try{
       const notes = await noteModel.find()//  hmesa arry return krega
       
        res.status(200).json({
         message: "note  fetched sucessfully " ,
         notes:notes 
     })
+      }catch(error){
+          res.status(500).json({
+              erorr:erorr.message
+          })
 
 });
 
@@ -70,7 +76,8 @@ app.patch('/arr/:id', async (req, res) => {
     });
 
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({
+        error: error.message });
   }
 });
 
